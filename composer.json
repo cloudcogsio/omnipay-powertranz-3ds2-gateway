@@ -1,5 +1,5 @@
 {
-  "name": "cloudcogsio/powertranz-3ds2-gateway",
+  "name": "cloudcogsio/omnipay-powertranz-3ds2-gateway",
   "type" : "library",
   "license" : "MIT",
   "authors" : [
