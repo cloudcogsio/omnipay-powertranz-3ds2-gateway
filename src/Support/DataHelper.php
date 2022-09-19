@@ -18,8 +18,22 @@ class DataHelper
         return (new ISO4217())->getByCode($alpha3)['numeric'];
     }
 
-    public static function CountryCode(string $alpha3) : string
+    /**
+     *
+     * @param string $alpha - Search string is 2 or 3 character country representation (Eg. CA or CAN)
+     * @param bool $alpha2
+     * @return string|null
+     */
+    public static function CountryCode(string $alpha, bool $alpha2 = true) : ?string
     {
-        return (new ISO3166())->alpha3($alpha3)['numeric'];
+        $alpha = trim($alpha);
+        try {
+            if ($alpha2) return (new ISO3166())->alpha2($alpha)['numeric'];
+
+            return (new ISO3166())->alpha3($alpha)['numeric'];
+        } catch (\Exception $e)
+        {}
+
+        return null;
     }
 }
