@@ -13,6 +13,8 @@ trait SchemaTraits
         $reflection = new \ReflectionClass($parent);
         foreach ($data as $key => $value)
         {
+            $paramType = ($reflection->hasProperty($key)) ? $reflection->getProperty($key)->getType()->getName() : false;
+
             if (is_array($value))
             {
                 // Special case 'Errors' key (due to PHP not supporting typed arrays) we need to check if this key exits and convert members to Error objects
@@ -26,7 +28,6 @@ trait SchemaTraits
                     $nestedData[$key] = $errors;
                 }
                 else {
-                    $paramType = ($reflection->hasProperty($key)) ? $reflection->getProperty($key)->getType()->getName() : false;
                     if ($paramType && class_exists($paramType)) {
                         $nestedObject = $this->hydrate($value, $paramType);
                         $nestedData[$key] = $nestedObject;
@@ -34,6 +35,13 @@ trait SchemaTraits
                 }
             }
             else {
+                switch ($paramType)
+                {
+                    case 'float':
+                        $value = round($value,2);
+                        break;
+                }
+
                 $nestedData[$key] = $value;
             }
         }

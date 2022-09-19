@@ -8,6 +8,10 @@ trait ResponseTraits
 {
     use AuthTrait;
 
+    public function getTransactionType() : ?int {
+        return $this->TransactionType ?? null;
+    }
+
     public function isSuccessful(): bool
     {
         return $this->Approved;

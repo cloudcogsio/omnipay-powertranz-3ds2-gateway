@@ -9,7 +9,7 @@ abstract class AbstractSchema
     /**
      * @throws \ReflectionException
      */
-    public function __construct(array $data)
+    public function __construct(array $data = [])
     {
         $this->hydrate($data, get_called_class());
     }
