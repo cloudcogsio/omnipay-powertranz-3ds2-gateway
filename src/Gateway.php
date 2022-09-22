@@ -32,7 +32,7 @@ class Gateway extends AbstractGateway
 
     public function getDefaultParameters() : array
     {
-        return include 'src/DefaultParameters.php';
+        return include 'DefaultParameters.php';
     }
 
     /**

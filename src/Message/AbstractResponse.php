@@ -31,8 +31,8 @@ abstract class AbstractResponse extends \Omnipay\Common\Message\AbstractResponse
         /** @var $httpResponse ResponseInterface */
         $httpResponse = $this->getData();
 
-        $json = $httpResponse->getBody()->getContents();
-        $this->data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+        $json = stripslashes($httpResponse->getBody()->getContents());
+        $this->data = json_decode($json, true, 512, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
 
         $this->hydrate($this->data, get_called_class());
 
