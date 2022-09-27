@@ -42,7 +42,7 @@ class CompleteAuthorizeRequest extends AuthRequest
     {
         $this->Approved = false;
 
-        if (isset($this->RiskManagement))
+        if (isset($this->RiskManagement->ThreeDSecure->StatusReason))
             $this->ResponseMessage = (StatusReason::lookup($this->RiskManagement->ThreeDSecure->StatusReason)) ?? $this->ResponseMessage;
 
         // CompleteAuthorizeResponse or CompleteSaleResponse
@@ -69,7 +69,8 @@ class CompleteAuthorizeRequest extends AuthRequest
 
             // 3DS complete
             case '3D0':
-                if (in_array($this->RiskManagement->ThreeDSecure->AuthenticationStatus, ["Y", "A"]))
+                if (isset($this->RiskManagement->ThreeDSecure->AuthenticationStatus) &&
+                    in_array($this->RiskManagement->ThreeDSecure->AuthenticationStatus, ["Y", "A"]))
                 {
                     $allow = true;
                 }
