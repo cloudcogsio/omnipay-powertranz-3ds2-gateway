@@ -24,7 +24,8 @@
     "alcohol/iso4217": "^4.0.0",
     "symfony/http-client": "5.4.x-dev",
     "php-http/httplug": "2.x-dev",
-    "nyholm/psr7": "^1.8@dev"
+    "nyholm/psr7": "^1.8@dev",
+    "brick/math": "^0.10.2"
   },
   "autoload" : {
     "psr-4" : {
