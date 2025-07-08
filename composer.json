@@ -17,7 +17,6 @@
   "description" : "Powertranz 3DS2 Payment Gateway Driver for Omnipay",
   "minimum-stability" : "dev",
   "require": {
-    "php" : "^8",
     "omnipay/common" : "^3",
     "ext-json": "*",
     "ramsey/uuid": "^4",
