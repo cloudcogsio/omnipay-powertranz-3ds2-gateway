@@ -47,6 +47,9 @@ trait SchemaTraits
         }
 
         $object = ($parent != get_called_class()) ? new $parent($nestedData) : $this;
+
+        //TODO - Undeclared properties show deprecated notice.
+        // Review classes implementing trait to ensure all properties are declared.
         foreach ($nestedData as $key => $value) $object->$key = $value;
 
         return $object;
