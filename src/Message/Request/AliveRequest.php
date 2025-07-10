@@ -8,7 +8,7 @@ class AliveRequest extends AbstractRequest
 {
     const ENDPOINT = 'Alive';
 
-    public function getData()
+    public function getData(): null
     {
         return null;
     }

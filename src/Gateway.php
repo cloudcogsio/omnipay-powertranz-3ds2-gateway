@@ -4,6 +4,8 @@ namespace Omnipay\PowerTranz;
 
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\AbstractRequest;
+use Omnipay\Common\Message\NotificationInterface;
+use Omnipay\Common\Message\RequestInterface;
 use Omnipay\PowerTranz\Message\Request\AliveRequest;
 use Omnipay\PowerTranz\Message\Request\AuthRequest;
 use Omnipay\PowerTranz\Message\Request\CaptureRequest;
@@ -14,11 +16,11 @@ use Omnipay\PowerTranz\Message\Request\SaleRequest;
 use Omnipay\PowerTranz\Message\Request\VoidRequest;
 
 /**
- * @method \Omnipay\Common\Message\NotificationInterface acceptNotification(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface fetchTransaction(array $options = [])
- * @method \Omnipay\Common\Message\RequestInterface createCard(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface updateCard(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface deleteCard(array $options = array())
+ * @method NotificationInterface acceptNotification(array $options = array())
+ * @method RequestInterface fetchTransaction(array $options = [])
+ * @method RequestInterface createCard(array $options = array())
+ * @method RequestInterface updateCard(array $options = array())
+ * @method RequestInterface deleteCard(array $options = array())
  */
 class Gateway extends AbstractGateway
 {
@@ -95,12 +97,13 @@ class Gateway extends AbstractGateway
     /**
      * Common logic required for completing an auth or sale
      *
+     * @param bool $singlePass
      * @param array $options
      * @return array
      * @throws \JsonException
      * @throws \ReflectionException
      */
-    protected function createOptionsForPaymentCompletion(array $options = [], bool $singlePass) : array
+    protected function createOptionsForPaymentCompletion(bool $singlePass, array $options = []) : array
     {
         $options[Constants::PARAM_POWERTRANZ_CREDENTIALS_REQUIRED] = false;
 
@@ -158,7 +161,7 @@ class Gateway extends AbstractGateway
     {
         return $this->createRequest(
             CompleteSaleRequest::class,
-            $this->createOptionsForPaymentCompletion($options, true)
+            $this->createOptionsForPaymentCompletion(true, $options)
         );
     }
 
@@ -189,7 +192,7 @@ class Gateway extends AbstractGateway
     {
         return $this->createRequest(
             CompleteAuthorizeRequest::class,
-            $this->createOptionsForPaymentCompletion($options, false)
+            $this->createOptionsForPaymentCompletion(false, $options)
         );
     }
 

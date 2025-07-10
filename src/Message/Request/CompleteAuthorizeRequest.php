@@ -22,9 +22,10 @@ class CompleteAuthorizeRequest extends AuthRequest
     }
 
     /**
+     * @param $data
+     * @return AbstractResponse
      * @throws InvalidResponseException
      * @throws \JsonException
-     * @throws \ReflectionException
      */
     public function sendData($data): AbstractResponse
     {
@@ -35,8 +36,7 @@ class CompleteAuthorizeRequest extends AuthRequest
     }
 
     /**
-     * @throws \ReflectionException
-     * @throws \JsonException
+     * @return AbstractResponse
      */
     protected function merchantDeniedResponse() : AbstractResponse
     {
