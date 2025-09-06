@@ -29,6 +29,8 @@ class CompleteAuthorizeRequest extends AuthRequest
      */
     public function sendData($data): AbstractResponse
     {
+        $this->commonHeaders = [...$this->commonHeaders, 'Content-Length' => strlen($data)];
+
         if ($this->merchantDecision())
             return parent::sendData($data);
 

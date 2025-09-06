@@ -66,7 +66,14 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
                 return $this->response = new $responseClassName($this, $httpResponse);
             }
 
-            throw new InvalidResponseException($httpResponse->getReasonPhrase(), $httpResponse->getStatusCode());
+            $exceptionDetails = implode(",\r\n",[
+                "Status Code: ".$httpResponse->getStatusCode(),
+                "Reason Phrase: ".$httpResponse->getReasonPhrase(),
+                "Request Body: ".$requestBody,
+                "Response Body: ".$httpResponse->getBody()->getContents()
+            ]);
+
+            throw new InvalidResponseException($exceptionDetails, $httpResponse->getStatusCode());
         }
 
         throw new InvalidResponseException();

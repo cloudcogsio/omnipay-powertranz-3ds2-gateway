@@ -2,6 +2,7 @@
 
 namespace Omnipay\PowerTranz;
 
+use Nyholm\Psr7\Response;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\AbstractRequest;
 use Omnipay\Common\Message\NotificationInterface;
@@ -108,7 +109,7 @@ class Gateway extends AbstractGateway
         $options[Constants::PARAM_POWERTRANZ_CREDENTIALS_REQUIRED] = false;
 
         $data = $_POST['Response'];
-        $HttpResponse = new \GuzzleHttp\Psr7\Response(http_response_code(), getallheaders(), $data);
+        $HttpResponse = new Response(http_response_code(), getallheaders(), $data);
 
         if ($singlePass) {
             $saleRequest = $originalAuthRequest ?? $this->PowerTranzSale(new Schema\SaleRequest([]));
