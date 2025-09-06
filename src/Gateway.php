@@ -2,6 +2,7 @@
 
 namespace Omnipay\PowerTranz;
 
+use Nyholm\Psr7\Response;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\AbstractRequest;
 use Omnipay\PowerTranz\Message\Request\AliveRequest;
@@ -96,16 +97,17 @@ class Gateway extends AbstractGateway
      * Common logic required for completing an auth or sale
      *
      * @param array $options
+     * @param bool $singlePass
      * @return array
      * @throws \JsonException
      * @throws \ReflectionException
      */
-    protected function createOptionsForPaymentCompletion(array $options = [], bool $singlePass) : array
+    protected function createOptionsForPaymentCompletion(array $options, bool $singlePass) : array
     {
         $options[Constants::PARAM_POWERTRANZ_CREDENTIALS_REQUIRED] = false;
 
         $data = $_POST['Response'];
-        $HttpResponse = new \GuzzleHttp\Psr7\Response(http_response_code(), getallheaders(), $data);
+        $HttpResponse = new Response(http_response_code(), getallheaders(), $data);
 
         if ($singlePass) {
             $saleRequest = $originalAuthRequest ?? $this->PowerTranzSale(new Schema\SaleRequest([]));

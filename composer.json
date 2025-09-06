@@ -17,19 +17,24 @@
   "description" : "Powertranz 3DS2 Payment Gateway Driver for Omnipay",
   "minimum-stability" : "dev",
   "require": {
-    "omnipay/common" : "^3",
+    "omnipay/common" : "^3.4",
     "ext-json": "*",
-    "ramsey/uuid": "^4",
-    "league/iso3166": "^4.1.0",
-    "alcohol/iso4217": "^4.0.0",
-    "symfony/http-client": "5.4.x-dev",
-    "php-http/httplug": "2.x-dev",
-    "nyholm/psr7": "^1.8@dev",
-    "brick/math": "^0.10.2"
+    "ramsey/uuid": "^4.9",
+    "league/iso3166": "^4.3",
+    "alcohol/iso4217": "^4.2",
+    "symfony/http-client": "^5.4",
+    "php-http/httplug": "^2.4",
+    "nyholm/psr7": "^1.8",
+    "brick/math": "^0.14"
   },
   "autoload" : {
     "psr-4" : {
       "Omnipay\\PowerTranz\\" : "src"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "php-http/discovery": true
     }
   }
 }
