@@ -60,7 +60,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         );
 
         if ($httpResponse instanceof \Psr\Http\Message\ResponseInterface) {
-            if ($httpResponse->getStatusCode() == "200") {
+            if ($httpResponse->getStatusCode() == 200) {
                 $responseClassName = $this->getResponseClassName($messageClassName);
 
                 return $this->response = new $responseClassName($this, $httpResponse);
