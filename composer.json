@@ -26,8 +26,7 @@
     "alcohol/iso4217": "^4.2",
     "symfony/http-client": "^5.4",
     "php-http/httplug": "^2.4",
-    "nyholm/psr7": "^1.8",
-    "brick/math": "^0.10.2"
+    "nyholm/psr7": "^1.8"
   },
   "require-dev": {
     "phpunit/phpunit": "^10.0"
